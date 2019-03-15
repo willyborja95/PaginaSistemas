@@ -1,17 +1,19 @@
 from rest_framework import serializers
 from . import models
 
-class TodoSerializer(serializers.ModelSerializer):
-
-    snippets = serializers.PrimaryKeyRelatedField(many=True, queryset=models.Todo.objects.all())
+class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
+        model = models.Users
+
         fields = (
-            'id',
-            'title',
-            'description',
+            'username',
+            'email',
+            'name',
+            'lastname',
+            'create_time',
+            'update_time'
         )
-        model = models.Todo
 
 class Category (serializers.ModelSerializer):
     class meta:

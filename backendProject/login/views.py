@@ -29,12 +29,14 @@ def login(request):
 
 @csrf_exempt
 @api_view(["GET"])
-@permission_classes((AllowAny,))
-def get(request):
-    data = {'sample_data': 123}
-    return Response(data, status=HTTP_200_OK)
+@permission_classes((IsAuthenticated,))
+def usuario(request):
+    if request.method == 'GET':
+        users = models.Users.objects.all()
+        serializer = serializers.UserSerializer(users, many=True)
+        return Response(serializer.data)
 
-
+"""
 class ListTodo(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticated,)
 
@@ -42,10 +44,4 @@ class ListTodo(generics.ListCreateAPIView):
         queryset = models.Todo.objects.all()
         serializer_class = serializers.TodoSerializer
         return Response("hola jose desde el metodo get")
-
-@csrf_exempt
-@api_view(["GET"])
-class DetailTodo(generics.RetrieveUpdateDestroyAPIView):
-    queryset = models.Todo.objects.all()
-    serializer_class = serializers.TodoSerializer
-
+"""
