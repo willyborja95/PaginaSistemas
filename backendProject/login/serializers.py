@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from . import models
+from login.models import Category, ItemCategory
 
 class TodoSerializer(serializers.ModelSerializer):
 
@@ -13,12 +14,12 @@ class TodoSerializer(serializers.ModelSerializer):
         )
         model = models.Todo
 
-class Category (serializers.ModelSerializer):
-    class meta:
+class CategorySerializer (serializers.ModelSerializer):
+    class Meta:
         model = models.Category
         fields = ('idCategory', 'nameCategory', 'active ')        
 
-class ItemCategory (serializers.ModelSerializer):
-    class meta:
+class ItemCategorySerializer (serializers.ModelSerializer):
+    class Meta:
         model = models.ItemCategory
         fields = ('item_category_id', 'name_item', 'active', 'category_category_id')

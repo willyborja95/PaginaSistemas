@@ -12,7 +12,8 @@ from . import serializers
 
 
 from rest_framework.permissions import IsAuthenticated
-
+from login.models import Category, ItemCategory
+from login.serializers import CategorySerializer, ItemCategorySerializer 
 @csrf_exempt
 @api_view(["POST"])
 @permission_classes((AllowAny,))
@@ -49,3 +50,19 @@ class DetailTodo(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Todo.objects.all()
     serializer_class = serializers.TodoSerializer
 
+@permission_classes((AllowAny,))
+class CategoryList (generics.ListCreateAPIView):
+    queryset = models.Category.objects.all()
+    serializer_class = CategorySerializer
+@permission_classes((AllowAny,))
+class CategoryDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.Category.objects.all()
+    serializer_class = CategorySerializer
+@permission_classes((AllowAny,))
+class ItemCategoryList(generics.ListCreateAPIView):
+    queryset = models.ItemCategory.objects.all()
+    serializer_class = ItemCategorySerializer
+@permission_classes((AllowAny,))
+class ItemCategoryDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.ItemCategory.objects.all()
+    serializer_class = ItemCategorySerializer
