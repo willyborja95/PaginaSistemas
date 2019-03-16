@@ -12,6 +12,25 @@ from . import serializers
 
 
 from rest_framework.permissions import IsAuthenticated
+from login.models import Category, ItemCategory
+from login.serializers import CategorySerializer, ItemCategorySerializer
+
+class CategoryList (generics.ListCreateAPIView):
+    queryset = models.Category.objects.all()
+    serializer_class = CategorySerializer
+
+class CategoryDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.Category.objects.all()
+    serializer_class = CategorySerializer
+
+class ItemCategoryList(generics.ListCreateAPIView):
+    queryset = models.ItemCategory.objects.all()
+    serializer_class = ItemCategorySerializer
+
+class ItemCategoryDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.ItemCategory.objects.all()
+    serializer_class = ItemCategorySerializer
+
 
 @csrf_exempt
 @api_view(["POST"])
@@ -35,13 +54,3 @@ def usuario(request):
         users = models.Users.objects.all()
         serializer = serializers.UserSerializer(users, many=True)
         return Response(serializer.data)
-
-"""
-class ListTodo(generics.ListCreateAPIView):
-    permission_classes = (IsAuthenticated,)
-
-    def get(self, request, format=None):
-        queryset = models.Todo.objects.all()
-        serializer_class = serializers.TodoSerializer
-        return Response("hola jose desde el metodo get")
-"""
