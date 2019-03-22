@@ -12,25 +12,77 @@ from . import serializers
 
 
 from rest_framework.permissions import IsAuthenticated
-from login.models import Category, ItemCategory
-from login.serializers import CategorySerializer, ItemCategorySerializer
-
+from login.models import Category, ItemCategory, Persons, Persons_departaments, Persons_role, Persons_media, Persons_Contacts
+from login.serializers import CategorySerializer, ItemCategorySerializer, PersonsSerializer, Persons_depaSerializer, Persons_roleSerializer, Persons_mediaSerializer, Persons_ContactSerializer
+@permission_classes((AllowAny,))
 class CategoryList (generics.ListCreateAPIView):
     queryset = models.Category.objects.all()
     serializer_class = CategorySerializer
 
+@permission_classes((AllowAny,))
 class CategoryDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Category.objects.all()
     serializer_class = CategorySerializer
 
+@permission_classes((AllowAny,))
 class ItemCategoryList(generics.ListCreateAPIView):
     queryset = models.ItemCategory.objects.all()
     serializer_class = ItemCategorySerializer
 
+@permission_classes((AllowAny,))
 class ItemCategoryDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.ItemCategory.objects.all()
     serializer_class = ItemCategorySerializer
 
+@permission_classes((AllowAny,))
+class PersonsList (generics.ListCreateAPIView):
+    queryset = models.Persons.objects.all()
+    serializer_class = PersonsSerializer
+
+@permission_classes((AllowAny,))
+class PersonsDetail (generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.Persons.objects.all()
+    serializer_class = PersonsSerializer
+
+@permission_classes((AllowAny,))
+class Persons_departamentsList (generics.ListCreateAPIView):
+    queryset = models.Persons_departaments.objects.all()
+    serializer_class = Persons_depaSerializer
+
+@permission_classes((AllowAny,))
+class Persons_departamentsDetail (generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.Persons_departaments.objects.all()
+    serializer_class = Persons_depaSerializer
+
+@permission_classes((AllowAny,))
+class Persons_roleList (generics.ListCreateAPIView):
+    queryset = models.Persons_role.objects.all()
+    serializer_class = Persons_roleSerializer
+
+@permission_classes((AllowAny,))
+class Persons_roleDetail (generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.Persons_role.objects.all()
+    serializer_class = Persons_roleSerializer
+
+@permission_classes((AllowAny,))
+class Persons_mediaList (generics.ListCreateAPIView):
+    queryset = models.Persons_media.objects.all()
+    serializer_class = Persons_mediaSerializer
+
+@permission_classes((AllowAny,))
+class Persons_mediaDetail (generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.Persons_media.objects.all()
+    serializer_class = Persons_mediaSerializer
+
+@permission_classes((AllowAny,))
+class Persons_ContactsList(generics.ListCreateAPIView):
+    queryset = models.Persons_Contacts.objects.all()
+    serializer_class = Persons_ContactSerializer
+
+@permission_classes((AllowAny,))
+class Persons_ContactsDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.Persons_Contacts.objects.all()
+    serializer_class = Persons_ContactSerializer
 
 @csrf_exempt
 @api_view(["POST"])

@@ -27,6 +27,32 @@ class Persons(models.Model):
     second_last_name = models.CharField(max_length=255)
     Persons_role = models.ManyToManyField(ItemCategory)
 
+    def __str__(self):
+        return self.first_name +" "+ self.first_last_name
+
+class Persons_departaments (models.Model):
+    persons_departaments_id = models.AutoField(primary_key=True)
+    item_category_id = models.ForeignKey(ItemCategory, on_delete = models.CASCADE)
+    persons_id = models.ForeignKey(Persons, on_delete = models.CASCADE)
+
+class Persons_role (models.Model):
+    persons_role_id = models.AutoField(primary_key=True)
+    item_category_id = models.ForeignKey(ItemCategory, on_delete = models.CASCADE)
+    persons_id = models.ForeignKey(Persons, on_delete = models.CASCADE)
+
+class Persons_media (models.Model):
+    persons_media_id = models.AutoField(primary_key=True)
+    path = models.CharField(max_length=255)
+    item_category_id = models.ForeignKey(ItemCategory, on_delete = models.CASCADE)
+    persons_id = models.ForeignKey(Persons, on_delete = models.CASCADE)
+
+class Persons_Contacts (models.Model):
+    contact_info_id = models.AutoField(primary_key=True)
+    item_category_id = models.ForeignKey(ItemCategory, on_delete = models.CASCADE)
+    persons_id = models.ForeignKey(Persons, on_delete = models.CASCADE)
+
+
+
 class UserManager(BaseUserManager):
     def create_superuser(self, person_id, username, email, password):
         person_id = Persons.objects.get(person_id=person_id)
