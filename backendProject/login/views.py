@@ -1,12 +1,12 @@
 from django.contrib.auth import authenticate
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.authtoken.models import Token
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import action, api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.status import (HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND, HTTP_200_OK)
 from rest_framework.response import Response
-
-from rest_framework import generics
+from django.shortcuts import get_object_or_404
+from rest_framework import generics, viewsets
 from . import models
 from . import serializers
 
@@ -15,18 +15,22 @@ from rest_framework.permissions import IsAuthenticated
 from login.models import Category, ItemCategory
 from login.serializers import CategorySerializer, ItemCategorySerializer
 
+@permission_classes((AllowAny,))
 class CategoryList (generics.ListCreateAPIView):
     queryset = models.Category.objects.all()
     serializer_class = CategorySerializer
 
+@permission_classes((AllowAny,))
 class CategoryDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Category.objects.all()
     serializer_class = CategorySerializer
 
+@permission_classes((AllowAny,))
 class ItemCategoryList(generics.ListCreateAPIView):
     queryset = models.ItemCategory.objects.all()
     serializer_class = ItemCategorySerializer
 
+@permission_classes((AllowAny,))
 class ItemCategoryDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.ItemCategory.objects.all()
     serializer_class = ItemCategorySerializer

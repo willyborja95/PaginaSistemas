@@ -44,12 +44,14 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'rest_auth',
-    'rest_auth.registration'
+    'rest_auth.registration',
+    'corsheaders'
 ]
 
 SITE_ID = 1
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -58,6 +60,15 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_WHITELIST = (
+    'localhost:4200',
+)
+CORS_ORIGIN_REGEX_WHITELIST = (
+    'localhost:4200',
+)
 
 ROOT_URLCONF = 'backendProject.urls'
 
@@ -86,7 +97,7 @@ WSGI_APPLICATION = 'backendProject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'paginaSistemas',
+        'NAME': 'paginaSistemas5',
         'USER': 'dbAdmin',
         'PASSWORD': 'password',
         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on

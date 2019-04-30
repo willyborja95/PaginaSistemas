@@ -11,13 +11,13 @@ class Category (models.Model):
         return self.nameCategory
 
 class ItemCategory (models.Model):
-    item_category_id = models.AutoField(primary_key=True) 
-    name_item = models.CharField(max_length= 255)
+    idItemCategory = models.AutoField(primary_key=True) 
+    nameItemCategory = models.CharField(max_length= 255)
     active = models.BooleanField(default=True)
-    category_category_id = models.ForeignKey(Category, on_delete = models.CASCADE)
+    category = models.ForeignKey(Category, on_delete = models.CASCADE)
 
     def __str__(self):
-        return self.name_item
+        return self.nameItemCategory
 
 class Persons(models.Model):
     person_id = models.AutoField(primary_key=True)
@@ -61,9 +61,9 @@ class Users(AbstractBaseUser, PermissionsMixin):
 
     def has_perm(self, perm, obj=None):
         return True
+        
     def has_module_perms(self, app_label):
         return True
 
-    @property
     def is_staff(self):
         return self.is_staff
