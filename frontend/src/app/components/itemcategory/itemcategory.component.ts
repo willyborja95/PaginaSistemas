@@ -32,24 +32,10 @@ export class ItemcategoryComponent implements OnInit {
 
   updateListItemCategories() {
     this.itemCategoryService.getItemCategories().subscribe(itemCategories => {
-      itemCategories.forEach(itemCategory => {
-        this.listCategories.forEach(category => {
-          if (Number(itemCategory.category) == category.idCategory) {
-            let newCategory = new Category(category.idCategory, category.nameCategory, category.active);
-            let newItemCategory = new ItemCategory(itemCategory.idItemCategory, itemCategory.nameItemCategory, itemCategory.active, newCategory);
-            this.listItemCategories.push(newItemCategory);
-            alert(JSON.stringify(this.listItemCategories))
-          }
-        },error =>{
-          alert("error 33333333")
-        });
-      },error =>{
-        alert("error 22222222222222222")
-      }
-      );
+      this.listItemCategories = itemCategories
     },
     error =>{
-      alert(error);
+      alert(JSON.stringify(error));
     }
     );
     //alert("holas")
