@@ -34,23 +34,26 @@ export class ItemcategoryComponent implements OnInit {
     this.itemCategoryService.getItemCategories().subscribe(itemCategories => {
       this.listItemCategories = itemCategories
     },
-    error =>{
-      alert(JSON.stringify(error));
-    }
+      error => {
+        alert(JSON.stringify(error));
+      }
     );
     //alert("holas")
   }
 
-  /*
-
-  deleteCategory(id: number) {
-    this.itemCategoryService.deleteCategory(id).subscribe(categories => {
+  deleteItemCategory(id: number) {
+    this.itemCategoryService.deleteItemCategory(id).subscribe(categories => {
+      this.updateListItemCategories();
     },
       error => {
         alert(JSON.stringify(error));
       })
-    this.updateListCategories();
+
   }
+
+  /*
+
+  
 
   updateCategory(id: number) {
     alert(JSON.stringify(this.itemCategoryForm.valueChanges));
@@ -62,7 +65,7 @@ export class ItemcategoryComponent implements OnInit {
   }
 
   displayedColumns: string[] = ['nameItemCategory', 'active', 'category', 'delete', 'update'];
-  
+
   //FORM ACTIONS
   //Create new form
   createFormGroup() {
