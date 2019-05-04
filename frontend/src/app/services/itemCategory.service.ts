@@ -27,11 +27,9 @@ export class ItemCategoryService {
     return this.httpClient.post(this.apiUrl+'itemcategory/', itemCategory, this.httpOptions);
   }
     
-  /*
-  public updateItemCategory(category: Category) {
-    return this.httpClient.put(this.apiUrl+'itemcategory/'+category.idCategory+'/', category,this.httpOptions);
+  public updateItemCategory(itemCategory: ItemCategory) {
+    return this.httpClient.put(this.apiUrl+'itemcategory/'+itemCategory.idItemCategory+'/', itemCategory,this.httpOptions);
   }
-  */
 
   public deleteItemCategory(id: number) { 
     return this.httpClient.delete(this.apiUrl+'itemcategory/'+id+'/', this.httpOptions);
