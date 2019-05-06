@@ -10,9 +10,18 @@ class CategorySerializer (serializers.ModelSerializer):
 
 class ItemCategorySerializer(serializers.ModelSerializer):
 
+    def getCategoryChoices():
+        return [(category.idCategory, category.nameCategory) for category in models.Category.objects.all()]
+
+    category = serializers.ChoiceField(source='category.nameCategory', choices=getCategoryChoices())
+
     class Meta():
         model = models.ItemCategory
         fields = ('idItemCategory', 'nameItemCategory', 'active', 'category')
+
+    def create(self, data):
+        category = models.Category.objects.get(idCategory = int(data.get('category')['nameCategory']))
+        return models.ItemCategory.objects.create(nameItemCategory = data.get('nameItemCategory'), active = data.get('active'), category = category)
 
 class UserSerializer(serializers.ModelSerializer):
 

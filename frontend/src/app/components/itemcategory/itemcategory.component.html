@@ -1,4 +1,4 @@
-<mat-grid-list cols="3">
+<mat-grid-list cols="3" >
   <mat-grid-tile [colspan]="1" class="w100">
     <mat-card class="w80">
       <form [formGroup]="itemCategoryForm" #formDirective="ngForm">
@@ -27,8 +27,8 @@
     </mat-card>
   </mat-grid-tile>
 
-  <mat-grid-tile [colspan]="2">
-    <mat-card class="w80">
+  <mat-grid-tile [colspan]="2" style="height: 100%">
+    <mat-card class="w80"> 
       <mat-table [dataSource]="listItemCategories" class="w100" cols="3">
 
         <ng-container matColumnDef="nameItemCategory">
@@ -43,12 +43,12 @@
 
         <ng-container matColumnDef="category">
           <mat-header-cell *matHeaderCellDef> Categoría </mat-header-cell>
-          <mat-cell *matCellDef="let itemCategory">{{itemCategory.category.nameCategory}} </mat-cell>
+          <mat-cell *matCellDef="let itemCategory">{{itemCategory.category}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="delete">
           <mat-header-cell *matHeaderCellDef> Eliminar </mat-header-cell>
-          <mat-cell *matCellDef="let itemCategory"><a (click)="deleteCategory(category.idCategory)"><i
+          <mat-cell *matCellDef="let itemCategory"><a (click)="deleteItemCategory(itemCategory.idItemCategory)"><i
                 class="material-icons">delete</i></a></mat-cell>
         </ng-container>
 

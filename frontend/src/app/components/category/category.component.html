@@ -1,4 +1,4 @@
-<mat-grid-list cols="3">
+<mat-grid-list cols="3" layout="row" layout-align="center center">
   <mat-grid-tile [colspan]="1" class="w100">
     <mat-card class="w80">
       <form [formGroup]="categoryForm" #formDirective="ngForm">
@@ -7,6 +7,7 @@
           <mat-form-field class="w100">
             <input matInput formControlName="nameCategory" placeholder="Nombre categoría" autocomplete="off">
           </mat-form-field>
+          
           <mat-checkbox formControlName="active" class="w100">Activo</mat-checkbox>
         </mat-card-content>
         <mat-card-actions>
@@ -17,7 +18,7 @@
     </mat-card>
   </mat-grid-tile>
 
-  <mat-grid-tile [colspan]="2">
+  <mat-grid-tile [colspan]="2" style="height: 100%">
     <mat-card class="w80">
       <mat-table [dataSource]="listCategories" class="w100" cols="3">
 
