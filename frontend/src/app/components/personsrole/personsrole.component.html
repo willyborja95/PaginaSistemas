@@ -1,0 +1,43 @@
+<mat-grid-list cols="3">
+    <mat-grid-tile [colspan]="1" class="w100">
+        <mat-card class="w80">
+            <form [formGroup]="itempersonsroleForm" #formDirective="ngForm">
+                <mat-card-title>Roles de Persona</mat-card-title>
+                <mat-card-content>
+
+
+
+
+                    <mat-form-field class="w100">
+                        <mat-label>Nombre Personas</mat-label>
+                        <mat-select formControlName="category">
+                            <mat-option [value]="category.idCategory" *ngFor="let category of listCategories">
+                                {{category.nameCategory}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+
+
+
+
+
+
+                    <mat-form-field class="w100">
+                        <mat-label>Roles Asignados</mat-label>
+                        <mat-select formControlName="category">
+                            <mat-option [value]="category.idCategory" *ngFor="let category of listCategories">
+                                {{category.nameCategory}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-raised-button color="primary" (click)="submitForm(itemCategoryForm)">Guardar</button>
+                    <button mat-raised-button (click)="resetForm()">Cancelar</button>
+                </mat-card-actions>
+            </form>
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>

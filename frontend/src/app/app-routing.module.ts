@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CategoryComponent } from './components/category/category.component';
 import { ItemcategoryComponent } from './components/itemcategory/itemcategory.component';
+import { PersonsroleComponent } from './components/personsrole/personsrole.component';
 
 const routes: Routes = [
   { path: 'category', component: CategoryComponent },
   { path: 'itemcategory', component: ItemcategoryComponent },
+  { path: 'personsrole', component: PersonsroleComponent},
 
 ];
 

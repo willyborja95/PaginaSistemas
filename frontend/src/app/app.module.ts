@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { ItemcategoryComponent } from './components/itemcategory/itemcategory.component';
+import { PersonsroleComponent } from './components/personsrole/personsrole.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { ItemcategoryComponent } from './components/itemcategory/itemcategory.co
     MainNavComponent,
     CategoryComponent,
     ItemcategoryComponent,
+    PersonsroleComponent,
   ],
   imports: [
     HttpClientModule,
