@@ -1,16 +1,16 @@
+import { Person } from './person';
 import { ItemCategory } from './itemCategory';
-//import { Persons } from './persons';
 
 export class PersonsRole {
 
     idPersonsRole: number;
+    person : Person;
     itemCategory: ItemCategory;
-    //person : Persons;
 
-    constructor(idPersonsRole?: number, itemCategory?: ItemCategory){
+    constructor(idPersonsRole?: number, person?: Person, itemCategory?: ItemCategory){
         this.idPersonsRole = idPersonsRole,
-        this.itemCategory = itemCategory
-        //this.person = person
+        this.person = person,
+        this.itemCategory = itemCategory  
     }
 
 }

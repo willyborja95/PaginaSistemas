@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ItemCategoryService } from '../../services/itemCategory.service';
+//Services
 import { PersonsRoleService  } from '../../services/persons-role.service';
-//import { CategoryService } from '../../services/category.service';
+import { ItemCategoryService } from '../../services/itemCategory.service';
+import { PersonService  } from '../../services/person.service';
 
-//import { Category } from '../../models/category';
-//import { Persons } from '../../models/persons';
+//Models
+import { Person } from '../../models/person';
 import { ItemCategory } from '../../models/itemCategory';
 import { PersonsRole } from '../../models/personsRole';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
@@ -16,21 +17,36 @@ import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/fo
 })
 export class PersonsroleComponent implements OnInit {
 
-  //listPersons: Persons[] = [];
+  listPersons: Person[] = [];
   listItemCategories: ItemCategory[] = [];
+  listPersonsRole: PersonsRole[] = [];
   personsRoleForm: FormGroup;
 
   constructor(
-    //private personsRoleService: PersonsRoleService ,
-    //private personsService: PersonService,
+    private personsRoleService: PersonsRoleService ,
+    private personService: PersonService,
     private itemCategoryService: ItemCategoryService,
   ) {
     this.personsRoleForm = this.createFormGroup();
    }
+  
+  //Listar personas y ItemCategories
+  updateListPersons() {
+    this.personService.getPersons().subscribe(persons => {
+      this.listPersons = persons;
+    });
+  }
 
-   updateListItemCategories() {
+  updateListItemCategories() {
     this.itemCategoryService.getItemCategories().subscribe(itemCategories => {
-      this.listItemCategories = itemCategories
+      this.listItemCategories = itemCategories;
+    });
+  }
+
+  //Listar todo
+  updateListPersonsRole() {
+    this.personsRoleService.getPersonsRole().subscribe(personsRole => {
+      this.listPersonsRole = personsRole
     },
       error => {
         alert(JSON.stringify(error));
@@ -38,31 +54,56 @@ export class PersonsroleComponent implements OnInit {
     );
   }
 
-  ngOnInit() {
-    //this.updateListCategories();
-    this.updateListItemCategories();
+  deletePersonsRole(id: number) {
+    this.personsRoleService.deletePersonsRole(id).subscribe(persons => {
+      this.updateListPersonsRole();
+    },
+      error => {
+        alert(JSON.stringify(error));
+      })
+
   }
+
+  updatePersonsRole(id: number) {
+    alert(JSON.stringify(this.personsRoleForm.valueChanges));
+  }
+
+  ngOnInit() {
+    this.updateListPersons();
+    this.updateListItemCategories();
+    this.updateListPersonsRole();
+  }
+
+  displayedColumns: string[] = ['person', 'itemCategory', 'delete', 'update'];
 
   createFormGroup() {
     return new FormGroup({
       idPersonsRole: new FormControl(),
-      nameItemCategory: new FormControl('', [
+      person: new FormControl('', [
         Validators.required,
-        Validators.maxLength(255)
       ]),
-      active: new FormControl(false),
-      category: new FormControl('', [
+      itemCategory: new FormControl('', [
         Validators.required,
-      ])
+      ]),
     });
   }
 
+  //Load data in form
+  loadData(personsRoleEdit: PersonsRole) {
+    this.personsRoleForm.setValue({
+      idPersonsRole: personsRoleEdit.idPersonsRole,
+      person : personsRoleEdit.person,
+      itemCategory: personsRoleEdit.itemCategory,
+
+    })
+  }
+
   //submit form
-  /*submitForm() {
-    if (this.personsRoleForm.value.idItemCategory == null) {
+  submitForm() {
+    if (this.personsRoleForm.value.idPersonsRole == null) {
       if (this.personsRoleForm.valid) {
-        this.itemCategoryService.createItemCategory(this.itemCategoryForm.value).subscribe(category => {
-          this.updateListItemCategories();
+        this.personsRoleService.createPersonsRole(this.personsRoleForm.value).subscribe(persons => {
+          this.updateListPersonsRole();
         }, error => {
           alert(JSON.stringify(error));
         })
@@ -70,15 +111,14 @@ export class PersonsroleComponent implements OnInit {
       }
     }
     else {
-      if (this.itemCategoryForm.valid) {
-        this.itemCategoryService.updateItemCategory(this.itemCategoryForm.value).subscribe(category => {
-          this.updateListItemCategories();
+      if (this.personsRoleForm.valid) {
+        this.personsRoleService.updatePersonsRole(this.personsRoleForm.value).subscribe(persons => {
+          this.updateListPersonsRole();
         })
         this.resetForm();
       }
     }
   }
-*/
 
   //reset form
   resetForm() {

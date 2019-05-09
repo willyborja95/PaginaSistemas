@@ -21,6 +21,18 @@ export class PersonsRoleService {
   
     }
 
+    public createPersonsRole(personsRole: PersonsRole) {
+      return this.httpClient.post(this.apiUrl+'personsrole/', personsRole, this.httpOptions);
+    }
+
+    public updatePersonsRole(personsRole: PersonsRole) {
+      return this.httpClient.put(this.apiUrl+'personsrole/'+personsRole.idPersonsRole+'/', personsRole,this.httpOptions);
+    }
+
+    public deletePersonsRole(id: number) { 
+      return this.httpClient.delete(this.apiUrl+'personsrole/'+id+'/', this.httpOptions);
+    }
+
     public getPersonsRole() { 
       return this.httpClient.get<PersonsRole[]>(this.apiUrl+'personsrole', this.httpOptions);
     }
