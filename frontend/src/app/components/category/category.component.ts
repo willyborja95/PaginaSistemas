@@ -35,10 +35,6 @@ export class CategoryComponent implements OnInit {
     this.updateListCategories();
   }
 
-  updateCategory(id: number) {
-    alert(JSON.stringify(this.categoryForm.valueChanges));
-  }
-
   ngOnInit() {
     this.updateListCategories();
   }
@@ -52,7 +48,7 @@ export class CategoryComponent implements OnInit {
       idCategory: new FormControl(),
       nameCategory: new FormControl('', [
         Validators.required,
-        Validators.maxLength(15)
+        Validators.maxLength(255)
       ]),
       active: new FormControl(false),
     });

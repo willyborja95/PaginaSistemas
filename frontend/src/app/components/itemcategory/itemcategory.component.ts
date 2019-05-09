@@ -38,7 +38,6 @@ export class ItemcategoryComponent implements OnInit {
         alert(JSON.stringify(error));
       }
     );
-    //alert("holas")
   }
 
   deleteItemCategory(id: number) {
@@ -51,14 +50,10 @@ export class ItemcategoryComponent implements OnInit {
 
   }
 
-  /*
-
-  
-
-  updateCategory(id: number) {
+  updateItemCategory(id: number) {
     alert(JSON.stringify(this.itemCategoryForm.valueChanges));
   }
-  */
+
   public ngOnInit() {
     this.updateListCategories();
     this.updateListItemCategories();
@@ -73,23 +68,25 @@ export class ItemcategoryComponent implements OnInit {
       idItemCategory: new FormControl(),
       nameItemCategory: new FormControl('', [
         Validators.required,
-        Validators.maxLength(15)
+        Validators.maxLength(255)
       ]),
       active: new FormControl(false),
-      category: new FormControl()
+      category: new FormControl('', [
+        Validators.required,
+      ])
     });
   }
 
-  /*
   //Load data in form
-  loadData(categoryEdit: Category) {
+  loadData(itemCategoryEdit: ItemCategory) {
     this.itemCategoryForm.setValue({
-      idCategory: categoryEdit.idCategory,
-      nameCategory: categoryEdit.nameCategory,
-      active: categoryEdit.active,
+      idItemCategory: itemCategoryEdit.idItemCategory,
+      nameItemCategory: itemCategoryEdit.nameItemCategory,
+      active: itemCategoryEdit.active,
+      category: itemCategoryEdit.category
     })
   }
-  */
+
   //submit form
   submitForm() {
     if (this.itemCategoryForm.value.idItemCategory == null) {
@@ -102,16 +99,14 @@ export class ItemcategoryComponent implements OnInit {
         this.resetForm();
       }
     }
-    /*
     else {
       if (this.itemCategoryForm.valid) {
-        this.itemCategoryService.updateCategory(this.itemCategoryForm.value).subscribe(category => {
-          this.updateListCategories();
+        this.itemCategoryService.updateItemCategory(this.itemCategoryForm.value).subscribe(category => {
+          this.updateListItemCategories();
         })
         this.resetForm();
       }
     }
-    */
   }
 
   //reset form
