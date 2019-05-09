@@ -10,6 +10,8 @@ class CategorySerializer (serializers.ModelSerializer):
 
 class ItemCategorySerializer(serializers.ModelSerializer):
     
+    category = serializers.PrimaryKeyRelatedField(queryset=models.Category.objects.all())
+
     class Meta:
         model = models.ItemCategory
         fields = ('idItemCategory', 'nameItemCategory', 'active', 'category')   
