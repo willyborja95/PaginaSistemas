@@ -30,7 +30,7 @@ class UserSerializer(serializers.ModelSerializer):
 class PersonsSerializer (serializers.ModelSerializer):
     class Meta:
         model = models.Persons
-        fields = ('first_name','second_name', 'first_last_name', 'second_last_name')
+        fields = ('person_id','first_name','second_name', 'first_last_name', 'second_last_name')
 
 class Persons_depaSerializer (serializers.ModelSerializer):
     class Meta:
