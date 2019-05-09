@@ -6,7 +6,7 @@ class CategorySerializer (serializers.ModelSerializer):
 
     class Meta:
         model = models.Category
-        fields = ('idCategory', 'nameCategory', 'active')        
+        fields = ('idCategory', 'nameCategory', 'active')     
 
 class ItemCategorySerializer(serializers.ModelSerializer):
     
