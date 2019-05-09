@@ -16,7 +16,7 @@ from login.models import Category, ItemCategory, Persons, Persons_departaments, 
 from login.serializers import CategorySerializer, ItemCategorySerializer, PersonsSerializer, Persons_depaSerializer, Persons_roleSerializer, Persons_mediaSerializer, Persons_ContactSerializer
 
 @permission_classes((AllowAny,))
-class CategoryRolList (generics.ListAPIView):
+class ItemCategoryRolList (generics.ListAPIView):
     categoryRol = models.Category.objects.get(nameCategory="rol usuario")
     queryset = models.ItemCategory.objects.filter(category=1)
     serializer_class = ItemCategorySerializer
