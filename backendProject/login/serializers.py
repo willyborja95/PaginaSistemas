@@ -6,10 +6,12 @@ class CategorySerializer (serializers.ModelSerializer):
 
     class Meta:
         model = models.Category
-        fields = ('idCategory', 'nameCategory', 'active')        
+        fields = ('idCategory', 'nameCategory', 'active')     
 
 class ItemCategorySerializer(serializers.ModelSerializer):
     
+    category = serializers.PrimaryKeyRelatedField(queryset=models.Category.objects.all())
+
     class Meta:
         model = models.ItemCategory
         fields = ('idItemCategory', 'nameItemCategory', 'active', 'category')   
@@ -28,7 +30,7 @@ class UserSerializer(serializers.ModelSerializer):
 class PersonsSerializer (serializers.ModelSerializer):
     class Meta:
         model = models.Persons
-        fields = ('first_name','second_name', 'first_last_name', 'second_last_name')
+        fields = ('person_id','first_name','second_name', 'first_last_name', 'second_last_name')
 
 class Persons_depaSerializer (serializers.ModelSerializer):
     class Meta:
