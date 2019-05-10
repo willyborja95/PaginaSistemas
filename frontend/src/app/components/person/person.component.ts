@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SystemJsNgModuleLoader } from '@angular/core';
 import { Person } from '../../models/person';
 import { PersonService } from '../../services/person.service';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
@@ -22,13 +22,14 @@ export class PersonComponent implements OnInit {
       this.listPersons = person;
     })
   }
-  deletePersons(name: string) {
-    this.personServices.deletePersons(name).subscribe(person => {
+  deletePersons(person_id: number) {
+    this.personServices.deletePersons(person_id).subscribe(person => {
+      this.updateListPersons();
     },
       error => {
         alert(JSON.stringify(error));
       })
-    this.updateListPersons();
+   
   }
 
   ngOnInit() {
@@ -39,7 +40,7 @@ export class PersonComponent implements OnInit {
   //Create new form
   createFormGroup() {
     return new FormGroup({
-      
+      person_id: new FormControl(),
       first_name: new FormControl('', [
         Validators.required,
         Validators.maxLength(255)
@@ -62,7 +63,7 @@ export class PersonComponent implements OnInit {
    //Load data in form
    loadData(personsEdit: Person) {
     this.personForm.setValue({
-     
+      person_id : personsEdit.person_id,
       first_name: personsEdit.first_name,
       second_name: personsEdit.second_name,
       first_last_name:personsEdit.first_last_name,
@@ -71,8 +72,9 @@ export class PersonComponent implements OnInit {
     })
   }
   //submit form
+
   submitForm() {
-    if (this.personForm.value.first_name == null) {
+    if (this.personForm.value.person_id == null) {
       if (this.personForm.valid) {
         this.personServices.createPersons(this.personForm.value).subscribe(person => {
           this.updateListPersons();
@@ -81,6 +83,7 @@ export class PersonComponent implements OnInit {
       }
     }else{
       if (this.personForm.valid) {
+        
         this.personServices.updatePersons(this.personForm.value).subscribe(person => {
           this.updateListPersons();
         })
@@ -90,15 +93,18 @@ export class PersonComponent implements OnInit {
 
     
   }
+
   //reset form
+ 
   resetForm() {
     let control: AbstractControl = null;
-   
+    this.personForm.reset({ active: false });
     this.personForm.markAsUntouched();
     Object.keys(this.personForm.controls).forEach((nameControl) => {
       control = this.personForm.controls[nameControl];
       control.setErrors(null);
+      
     });
-    this.personForm.reset;
+   
   }
 }

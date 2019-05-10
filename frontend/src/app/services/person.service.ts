@@ -23,11 +23,11 @@ export class PersonService {
   }
     
   public updatePersons(persons: Person) {
-    return this.httpClient.put(this.apiUrl+'persons/'+persons.first_name+'/', persons,this.httpOptions);
+    return this.httpClient.put(this.apiUrl+'persons/'+persons.person_id+'/', persons,this.httpOptions);
   }
 
-  public deletePersons(name: string) { 
-    return this.httpClient.delete(this.apiUrl+'persons/'+name+'/', this.httpOptions);
+  public deletePersons(person_id: number) { 
+    return this.httpClient.delete(this.apiUrl+'persons/'+person_id+'/', this.httpOptions);
   }
 
   public getPersons() { 
