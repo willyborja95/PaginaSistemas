@@ -22,8 +22,8 @@ export class PersonComponent implements OnInit {
       this.listPersons = person;
     })
   }
-  deletePersons(name: string) {
-    this.personServices.deletePersons(name).subscribe(person => {
+  deletePersons(person_id: number) {
+    this.personServices.deletePersons(person_id).subscribe(person => {
     },
       error => {
         alert(JSON.stringify(error));
@@ -72,7 +72,7 @@ export class PersonComponent implements OnInit {
   }
   //submit form
   submitForm() {
-    if (this.personForm.value.first_name == null) {
+    if (this.personForm.value.person_id == null) {
       if (this.personForm.valid) {
         this.personServices.createPersons(this.personForm.value).subscribe(person => {
           this.updateListPersons();
@@ -93,7 +93,7 @@ export class PersonComponent implements OnInit {
   //reset form
   resetForm() {
     let control: AbstractControl = null;
-   
+   this.personForm.reset({active :false});
     this.personForm.markAsUntouched();
     Object.keys(this.personForm.controls).forEach((nameControl) => {
       control = this.personForm.controls[nameControl];

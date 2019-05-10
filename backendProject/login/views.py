@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate
 from django.views.decorators.csrf import csrf_exempt
+from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import action, api_view, permission_classes
 from rest_framework.permissions import AllowAny
@@ -17,9 +18,14 @@ from login.serializers import CategorySerializer, ItemCategorySerializer, Person
 
 @permission_classes((AllowAny,))
 class ItemCategoryRolList (generics.ListAPIView):
-    categoryRol = models.Category.objects.get(nameCategory="rol usuario")
-    queryset = models.ItemCategory.objects.filter(category=1)
-    serializer_class = ItemCategorySerializer
+    try:
+        categoryRol = models.Category.objects.get(nameCategory="rol usuario")
+        queryset = models.ItemCategory.objects.filter(category=categoryRol)
+        serializer_class = ItemCategorySerializer
+    except ObjectDoesNotExist:
+        queryset = models.ItemCategory.objects.none()
+        serializer_class = ItemCategorySerializer
+        
 
 @permission_classes((AllowAny,))
 class CategoryList (generics.ListCreateAPIView):

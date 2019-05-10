@@ -1,12 +1,12 @@
 export class Person {
-    idPerson:number;
+    person_id:number;
     first_name:string;
     second_name:string;
     first_last_name:string;
     second_last_name:string;
 
-constructor(idPerson?:number,first_name?:string,second_name?:string,first_last_name?:string,second_last_name?:string){
-    this.idPerson=idPerson,
+constructor(person_id?:number,first_name?:string,second_name?:string,first_last_name?:string,second_last_name?:string){
+    this.person_id=person_id,
     this.first_name=first_name,
     this.second_name=second_name,
     this.first_last_name=first_last_name;

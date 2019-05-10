@@ -30,10 +30,10 @@ export class PersonsroleComponent implements OnInit {
     this.personsRoleForm = this.createFormGroup();
    }
   
-  //Listar personas y ItemCategories
+  //Persons and Categories
   updateListPersons() {
-    this.personService.getPersons().subscribe(persons => {
-      this.listPersons = persons;
+    this.personService.getPersons().subscribe(person => {
+      this.listPersons = person;
     });
   }
 
@@ -43,7 +43,7 @@ export class PersonsroleComponent implements OnInit {
     });
   }
 
-  //Listar todo
+  //All 
   updateListPersonsRole() {
     this.personsRoleService.getPersonsRole().subscribe(personsRole => {
       this.listPersonsRole = personsRole
@@ -78,11 +78,11 @@ export class PersonsroleComponent implements OnInit {
 
   createFormGroup() {
     return new FormGroup({
-      idPersonsRole: new FormControl(),
-      person: new FormControl('', [
+      persons_role_id: new FormControl(),
+      persons_id: new FormControl('', [
         Validators.required,
       ]),
-      itemCategory: new FormControl('', [
+      item_category_id: new FormControl('', [
         Validators.required,
       ]),
     });
@@ -91,18 +91,18 @@ export class PersonsroleComponent implements OnInit {
   //Load data in form
   loadData(personsRoleEdit: PersonsRole) {
     this.personsRoleForm.setValue({
-      idPersonsRole: personsRoleEdit.idPersonsRole,
-      person : personsRoleEdit.person,
-      itemCategory: personsRoleEdit.itemCategory,
+      persons_role_id: personsRoleEdit.persons_role_id,
+      persons_id : personsRoleEdit.persons_id,
+      item_category_id: personsRoleEdit.item_category_id,
 
     })
   }
 
   //submit form
   submitForm() {
-    if (this.personsRoleForm.value.idPersonsRole == null) {
+    if (this.personsRoleForm.value.persons_role_id == null) {
       if (this.personsRoleForm.valid) {
-        this.personsRoleService.createPersonsRole(this.personsRoleForm.value).subscribe(persons => {
+        this.personsRoleService.createPersonsRole(this.personsRoleForm.value).subscribe(roleṔerson => {
           this.updateListPersonsRole();
         }, error => {
           alert(JSON.stringify(error));
@@ -112,7 +112,7 @@ export class PersonsroleComponent implements OnInit {
     }
     else {
       if (this.personsRoleForm.valid) {
-        this.personsRoleService.updatePersonsRole(this.personsRoleForm.value).subscribe(persons => {
+        this.personsRoleService.updatePersonsRole(this.personsRoleForm.value).subscribe(rolePerson => {
           this.updateListPersonsRole();
         })
         this.resetForm();

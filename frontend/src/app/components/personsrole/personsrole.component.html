@@ -6,9 +6,9 @@
 
                 <mat-form-field class="w100">
                     <mat-label>Nombre Personas</mat-label>
-                    <mat-select formControlName="persons">
-                        <mat-option [value]="persons.idPerson" *ngFor="let persons of listPersons">
-                            {{persons.first_name}} {{persons.second_name}} {{persons.first_last_name}} {{persons.second_last_name}}
+                    <mat-select formControlName="persons_id">
+                        <mat-option [value]="person.person_id" *ngFor="let person of listPersons">
+                            {{person.first_name}} {{person.second_name}} {{person.first_last_name}} {{person.second_last_name}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -16,7 +16,7 @@
 
                 <mat-form-field class="w100">
                     <mat-label>Roles Asignados</mat-label>
-                    <mat-select formControlName="itemCategory">
+                    <mat-select formControlName="item_category_id">
                         <mat-option [value]="itemCategory.idItemCategory" *ngFor="let itemCategory of listItemCategories">
                             {{itemCategory.nameItemCategory}}
                         </mat-option>
@@ -32,21 +32,20 @@
     </mat-card>
     <mat-card class="col-sm-7 d-inline-block">
 
-        <mat-table [dataSource]="listPersonsRole" class="w100" cols="3">
-          
+        <mat-table [dataSource]="listPersonsRole" class="w100" cols="3"> 
           <ng-container matColumnDef="person">
             <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
-            <mat-cell *matCellDef="let personsRole"> {{personsRole.person}} </mat-cell>
+            <mat-cell *matCellDef="let personsRole"> {{personsRole.persons_id}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="itemCategory">
             <mat-header-cell *matHeaderCellDef> Rol </mat-header-cell>
-            <mat-cell *matCellDef="let personsRole">{{personsRole.itemCategory}} </mat-cell>
+            <mat-cell *matCellDef="let personsRole">{{personsRole.item_category_id}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="delete">
             <mat-header-cell *matHeaderCellDef> Eliminar </mat-header-cell>
-            <mat-cell *matCellDef="let personsRole"><a (click)="deletePersonsRole(personsRole.idPersonsRole)"><i
+            <mat-cell *matCellDef="let personsRole"><a (click)="deletePersonsRole(personsRole.persons_role_id)"><i
                 class="material-icons">delete</i></a></mat-cell>
           </ng-container>
 
