@@ -5,14 +5,15 @@ import { ItemcategoryComponent } from './components/itemcategory/itemcategory.co
 import { PersonComponent } from './components/person/person.component';
 import { PersonsroleComponent } from './components/personsrole/personsrole.component';
 import { PersonsmediaComponent } from './components/personsmedia/personsmedia.component';
+import { PersoncontactsComponent } from './components/personcontacts/personcontacts.component';
 
 const routes: Routes = [
   { path: 'category', component: CategoryComponent },
   { path: 'itemcategory', component: ItemcategoryComponent },
   { path: 'person', component: PersonComponent },
   { path: 'personsrole', component: PersonsroleComponent },
-  { path: 'personsmedia', component: PersonsmediaComponent }
-
+  { path: 'personsmedia', component: PersonsmediaComponent },
+  { path: 'personcontact', component: PersoncontactsComponent }
 ];
 
 @NgModule({

@@ -14,6 +14,7 @@ import { ItemcategoryComponent } from './components/itemcategory/itemcategory.co
 import { PersonsroleComponent } from './components/personsrole/personsrole.component';
 import { PersonComponent } from './components/person/person.component';
 import { PersonsmediaComponent } from './components/personsmedia/personsmedia.component';
+import { PersoncontactsComponent } from './components/personcontacts/personcontacts.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { PersonsmediaComponent } from './components/personsmedia/personsmedia.co
     PersonsroleComponent,
     PersonComponent,
     PersonsmediaComponent,
+    PersoncontactsComponent,
 
   ],
   imports: [
