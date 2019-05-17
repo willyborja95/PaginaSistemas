@@ -55,7 +55,7 @@ export class PersoncontactsComponent implements OnInit {
       })
   }
   //Update
-  updatePersonsRole(id: number) {
+  updatePersonsContact(id: number) {
     alert(JSON.stringify(this.personsContactform.valueChanges));
   }
   ngOnInit() {
