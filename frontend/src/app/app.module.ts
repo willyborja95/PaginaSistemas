@@ -13,6 +13,7 @@ import { ItemcategoryComponent } from './components/itemcategory/itemcategory.co
 
 import { PersonsroleComponent } from './components/personsrole/personsrole.component';
 import { PersonComponent } from './components/person/person.component';
+import { PersonsmediaComponent } from './components/personsmedia/personsmedia.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { PersonComponent } from './components/person/person.component';
     ItemcategoryComponent,
     PersonsroleComponent,
     PersonComponent,
+    PersonsmediaComponent,
 
   ],
   imports: [
