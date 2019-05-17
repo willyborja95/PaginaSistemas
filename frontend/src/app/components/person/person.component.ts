@@ -2,7 +2,7 @@ import { Component, OnInit, SystemJsNgModuleLoader } from '@angular/core';
 import { Person } from '../../models/person';
 import { PersonService } from '../../services/person.service';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
-
+import {MatPaginator, MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-person',
