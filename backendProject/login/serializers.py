@@ -1,12 +1,12 @@
 from rest_framework import serializers
 from . import models
-from login.models import Category, ItemCategory, Persons, Persons_departaments, Persons_role, Persons_media, Persons_Contacts
+from login.models import Category, ItemCategory, Persons, Persons_departaments, Persons_role, Persons_media, Persons_Contacts, Subject_matter, Pre_requirements, Site, Info_site, Content, Content_media
 
 class CategorySerializer (serializers.ModelSerializer):
 
     class Meta:
         model = models.Category
-        fields = ('idCategory', 'nameCategory', 'active')     
+        fields = "__all__"  
 
 class ItemCategorySerializer(serializers.ModelSerializer):
     
@@ -14,23 +14,18 @@ class ItemCategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.ItemCategory
-        fields = ('idItemCategory', 'nameItemCategory', 'active', 'category')   
+        fields = "__all__"   
 
 class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Users
-
-        fields = (
-            'username',
-            'create_time',
-            'update_time'
-        )
+        fields = "__all__"
 
 class PersonsSerializer (serializers.ModelSerializer):
     class Meta:
         model = models.Persons
-        fields = ('person_id','first_name','second_name', 'first_last_name', 'second_last_name')
+        fields = "__all__"
 
 class Persons_depaSerializer (serializers.ModelSerializer):
     class Meta:
@@ -50,4 +45,34 @@ class Persons_mediaSerializer (serializers.ModelSerializer):
 class Persons_ContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Persons_Contacts
+        fields = "__all__"
+
+class Subject_matter_Serializer (serializers.ModelSerializer):
+    class Meta:
+        model = models.Subject_matter
+        fields = "__all__"
+
+class Pre_requirements_Serializer (serializers.ModelSerializer):
+    class Meta:
+        model = models.Pre_requirements
+        fields = "__all__"
+
+class Site_Serializer (serializers.ModelSerializer):
+    class Meta:
+        model = models.Site
+        fields = "__all__"
+
+class Info_site_Serializer (serializers.ModelSerializer):
+    class Meta:
+        model = models.Info_site
+        fields = "__all__"
+
+class Content_Serializer (serializers.ModelSerializer):
+    class Meta:
+        model = models.Content
+        fields = "__all__"
+
+class Content_media_Serializer (serializers.ModelSerializer):
+    class Meta: 
+        model = models.Content_media
         fields = "__all__"

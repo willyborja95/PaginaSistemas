@@ -4,7 +4,7 @@ from django.utils import timezone
 
 class Category (models.Model):
     idCategory = models.AutoField(primary_key=True)
-    nameCategory = models.CharField(max_length= 255)
+    nameCategory = models.CharField(max_length= 255, unique = True)
     active = models.BooleanField(default=True)
 
     def __str__(self):
@@ -32,8 +32,9 @@ class Persons(models.Model):
 
 class Persons_departaments (models.Model):
     persons_departaments_id = models.AutoField(primary_key=True)
-    item_category_id = models.ForeignKey(ItemCategory, on_delete = models.CASCADE)
     persons_id = models.ForeignKey(Persons, on_delete = models.CASCADE)
+    item_category_id = models.ForeignKey('ItemCategory', on_delete=models.CASCADE, null=True, related_name='item_category_id')
+    universitycareer = models.ForeignKey('ItemCategory', on_delete=models.CASCADE, null=True, related_name='universitycareer')
 
 class Persons_role (models.Model):
     persons_role_id = models.AutoField(primary_key=True)
@@ -51,7 +52,43 @@ class Persons_Contacts (models.Model):
     item_category_id = models.ForeignKey(ItemCategory, on_delete = models.CASCADE)
     persons_id = models.ForeignKey(Persons, on_delete = models.CASCADE)
 
+class Subject_matter (models.Model):
+    subject_matter_id = models.AutoField(primary_key=True)
+    name_subject_matter = models.CharField(max_length=255)
+    universitycareer = models.ForeignKey(ItemCategory, on_delete = models.CASCADE)
 
+class Pre_requirements (models.Model):
+    pre_requirements_id = models.AutoField(primary_key=True)
+    subject_matter_id_id = models.ForeignKey('Subject_matter', on_delete=models.CASCADE, null=False, related_name='subject_matter_id_id')
+    subject_matter_requeriment_id = models.ForeignKey('Subject_matter', on_delete=models.CASCADE, null=False, related_name='subject_matter_requeriment_id')
+
+class Site (models.Model):
+    site_id = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=45)
+    icon = models.CharField(max_length=45)
+    favicon = models.CharField(max_length=45)
+
+class Info_site (models.Model):
+    info_site_id = models.AutoField(primary_key=True)
+    site_site_id = models.ForeignKey(Site, on_delete = models.CASCADE)
+    description = models.CharField(max_length=45)
+    type_info = models.ForeignKey(ItemCategory, on_delete = models.CASCADE)
+
+class Content (models.Model):
+    content_id = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=45, null = False)
+    description = models.CharField(max_length=500, null=False)
+    update_time = models.DateTimeField(default=timezone.now, null=False, blank=False)
+    create_time = models.DateTimeField(default=timezone.now, null=False, blank=False)
+    type_event = models.ForeignKey('ItemCategory', on_delete=models.CASCADE, null=False, related_name='type_event')
+    academic_period = models.ForeignKey('ItemCategory', on_delete=models.CASCADE, null=False, related_name='academic_period')
+    content_universitycareer = models.ForeignKey('ItemCategory', on_delete=models.CASCADE, null=False, related_name='content_universitycareer')
+
+class Content_media (models.Model):
+    content_media_id = models.AutoField(primary_key=True)
+    path = models.CharField(max_length=500)
+    item_category_item_category_id = models.ForeignKey(ItemCategory, on_delete = models.CASCADE)
+    content_content_id = models.ForeignKey(Content, null=False, on_delete = models.CASCADE)
 
 class UserManager(BaseUserManager):
     def create_superuser(self, person_id, username, email, password):

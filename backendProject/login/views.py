@@ -13,8 +13,8 @@ from . import serializers
 
 
 from rest_framework.permissions import IsAuthenticated
-from login.models import Category, ItemCategory, Persons, Persons_departaments, Persons_role, Persons_media, Persons_Contacts
-from login.serializers import CategorySerializer, ItemCategorySerializer, PersonsSerializer, Persons_depaSerializer, Persons_roleSerializer, Persons_mediaSerializer, Persons_ContactSerializer
+from login.models import Category, ItemCategory, Persons, Persons_departaments, Persons_role, Persons_media, Persons_Contacts, Subject_matter, Pre_requirements, Site, Info_site, Content, Content_media
+from login.serializers import CategorySerializer, ItemCategorySerializer, PersonsSerializer, Persons_depaSerializer, Persons_roleSerializer, Persons_mediaSerializer, Persons_ContactSerializer, Subject_matter_Serializer, Pre_requirements_Serializer, Site_Serializer, Info_site_Serializer, Content_Serializer, Content_media_Serializer
 
 @permission_classes((AllowAny,))
 class ItemCategoryRolList (generics.ListAPIView):
@@ -25,8 +25,18 @@ class ItemCategoryRolList (generics.ListAPIView):
     except ObjectDoesNotExist:
         queryset = models.ItemCategory.objects.none()
         serializer_class = ItemCategorySerializer
-        
 
+'''
+class ItemCategoryTitulacionList (generics.ListAPIView):
+    try:
+        categoryTitulacion = models.Category.objects.get(nameCategory="titulación")
+        queryset = models.ItemCategory.objects.filter(category=categoryTitulacion)
+        serializer_class = ItemCategorySerializer
+    except ObjectDoesNotExist:
+        queryset = models.ItemCategory.objects.none()
+        serializer_class = ItemCategorySerializer
+'''
+        
 @permission_classes((AllowAny,))
 class CategoryList (generics.ListCreateAPIView):
     queryset = models.Category.objects.all()
@@ -96,6 +106,66 @@ class Persons_ContactsList(generics.ListCreateAPIView):
 class Persons_ContactsDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Persons_Contacts.objects.all()
     serializer_class = Persons_ContactSerializer
+
+@permission_classes((AllowAny,))
+class Subject_matterList(generics.ListCreateAPIView):
+    queryset = models.Subject_matter.objects.all()
+    serializer_class = Subject_matter_Serializer
+
+@permission_classes((AllowAny,))
+class Subject_matterDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.Subject_matter.objects.all()
+    serializer_class = Subject_matter_Serializer
+
+@permission_classes((AllowAny,))
+class Pre_requerimentsList(generics.ListCreateAPIView):
+    queryset = models.Pre_requirements.objects.all()
+    serializer_class = Pre_requirements_Serializer
+
+@permission_classes((AllowAny,))
+class Pre_requerimentsDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.Pre_requirements.objects.all()
+    serializer_class = Pre_requirements_Serializer
+
+@permission_classes((AllowAny,))
+class SiteList(generics.ListCreateAPIView):
+    queryset = models.Site.objects.all()
+    serializer_class = Site_Serializer
+
+@permission_classes((AllowAny,))
+class SiteDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.Site.objects.all()
+    serializer_class = Site_Serializer
+
+@permission_classes ((AllowAny,))
+class Info_siteList(generics.ListCreateAPIView):
+    queryset = models.Info_site.objects.all()
+    serializer_class = Info_site_Serializer
+
+@permission_classes ((AllowAny,))
+class Info_siteDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.Info_site.objects.all()
+    serializer_class = Info_site_Serializer
+
+@permission_classes ((AllowAny,))
+class ContentList(generics.ListCreateAPIView):
+    queryset = models.Content.objects.all()
+    serializer_class = Content_Serializer
+
+@permission_classes ((AllowAny,))
+class ContentDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.Content.objects.all()
+    serializer_class = Content_Serializer
+
+@permission_classes ((AllowAny,))
+class Content_mediaList(generics.ListCreateAPIView):
+    queryset = models.Content_media.objects.all()
+    serializer_class = Content_media_Serializer
+
+@permission_classes ((AllowAny,))
+class Content_mediaDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.Content_media.objects.all()
+    serializer_class = Content_media_Serializer
 
 @csrf_exempt
 @api_view(["POST"])
