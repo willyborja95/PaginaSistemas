@@ -26,7 +26,6 @@ class ItemCategoryRolList (generics.ListAPIView):
         queryset = models.ItemCategory.objects.none()
         serializer_class = ItemCategorySerializer
 
-'''
 class ItemCategoryTitulacionList (generics.ListAPIView):
     try:
         categoryTitulacion = models.Category.objects.get(nameCategory="titulación")
@@ -35,7 +34,6 @@ class ItemCategoryTitulacionList (generics.ListAPIView):
     except ObjectDoesNotExist:
         queryset = models.ItemCategory.objects.none()
         serializer_class = ItemCategorySerializer
-'''
         
 @permission_classes((AllowAny,))
 class CategoryList (generics.ListCreateAPIView):
