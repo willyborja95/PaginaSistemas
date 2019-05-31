@@ -26,6 +26,7 @@ class ItemCategoryRolList (generics.ListAPIView):
         queryset = models.ItemCategory.objects.none()
         serializer_class = ItemCategorySerializer
 
+@permission_classes((AllowAny,))
 class ItemCategoryTitulacionList (generics.ListAPIView):
     try:
         categoryTitulacion = models.Category.objects.get(nameCategory="titulación")
@@ -34,7 +35,37 @@ class ItemCategoryTitulacionList (generics.ListAPIView):
     except ObjectDoesNotExist:
         queryset = models.ItemCategory.objects.none()
         serializer_class = ItemCategorySerializer
-        
+
+@permission_classes((AllowAny,))
+class ItemCategoryTypeInfoList (generics.ListAPIView):
+    try:
+        categoryTypeInfo = models.Category.objects.get(nameCategory="tipo info")
+        queryset = models.ItemCategory.objects.filter(category=categoryTypeInfo)
+        serializer_class = ItemCategorySerializer
+    except ObjectDoesNotExist:
+        queryset = models.ItemCategory.objects.none()
+        serializer_class = ItemCategorySerializer
+
+@permission_classes((AllowAny,))
+class ItemCategoryAcademicPeriodList (generics.ListAPIView):
+    try:
+        categoryAcademicPeriod = models.Category.objects.get(nameCategory="periodo academico")
+        queryset = models.ItemCategory.objects.filter(category=categoryAcademicPeriod)
+        serializer_class = ItemCategorySerializer
+    except ObjectDoesNotExist:
+        queryset = models.ItemCategory.objects.none()
+        serializer_class = ItemCategorySerializer
+
+@permission_classes((AllowAny,))
+class ItemCategoryTypeEventList (generics.ListAPIView):
+    try:        
+        categoryTypeEvent = models.Category.objects.get(nameCategory="tipo evento")
+        queryset = models.ItemCategory.objects.filter(category=categoryTypeEvent)
+        serializer_class = ItemCategorySerializer
+    except ObjectDoesNotExist:
+        queryset = models.ItemCategory.objects.none()
+        serializer_class = ItemCategorySerializer
+
 @permission_classes((AllowAny,))
 class CategoryList (generics.ListCreateAPIView):
     queryset = models.Category.objects.all()

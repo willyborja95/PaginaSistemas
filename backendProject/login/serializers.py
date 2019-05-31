@@ -48,11 +48,18 @@ class Persons_ContactSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 class Subject_matter_Serializer (serializers.ModelSerializer):
+
+    universitycareer = serializers.PrimaryKeyRelatedField(queryset=models.ItemCategory.objects.all())
+
     class Meta:
         model = models.Subject_matter
         fields = "__all__"
 
 class Pre_requirements_Serializer (serializers.ModelSerializer):
+
+    subject_matter_id_id = serializers.PrimaryKeyRelatedField(queryset=models.Subject_matter.objects.all())
+    subject_matter_requeriment_id = serializers.PrimaryKeyRelatedField(queryset=models.Subject_matter.objects.all())
+
     class Meta:
         model = models.Pre_requirements
         fields = "__all__"
@@ -68,11 +75,19 @@ class Info_site_Serializer (serializers.ModelSerializer):
         fields = "__all__"
 
 class Content_Serializer (serializers.ModelSerializer):
+    '''
+    content_universitycareer = serializers.PrimaryKeyRelatedField(queryset=models.ItemCategory.objects.all())
+    type_event = serializers.PrimaryKeyRelatedField(queryset=models.ItemCategory.objects.all())
+    academic_period = serializers.PrimaryKeyRelatedField(queryset=models.ItemCategory.objects.all())
+    '''
     class Meta:
         model = models.Content
         fields = "__all__"
 
 class Content_media_Serializer (serializers.ModelSerializer):
+
+    item_category_item_category_id = serializers.PrimaryKeyRelatedField(queryset=models.ItemCategory.objects.all())
+
     class Meta: 
         model = models.Content_media
         fields = "__all__"

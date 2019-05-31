@@ -21,11 +21,10 @@ class ItemCategory (models.Model):
 
 class Persons(models.Model):
     person_id = models.AutoField(primary_key=True)
-    first_name = models.CharField(max_length=255)
+    first_name = models.CharField(max_length=255, null=False)
     second_name = models.CharField(max_length=255)
-    first_last_name = models.CharField(max_length=255)
+    first_last_name = models.CharField(max_length=255, null=False)
     second_last_name = models.CharField(max_length=255)
-    Persons_role = models.ManyToManyField(ItemCategory)
 
     def __str__(self):
         return self.first_name +" "+ self.first_last_name
@@ -33,8 +32,8 @@ class Persons(models.Model):
 class Persons_departaments (models.Model):
     persons_departaments_id = models.AutoField(primary_key=True)
     persons_id = models.ForeignKey(Persons, on_delete = models.CASCADE)
-    item_category_id = models.ForeignKey('ItemCategory', on_delete=models.CASCADE, null=True, related_name='item_category_id')
-    universitycareer = models.ForeignKey('ItemCategory', on_delete=models.CASCADE, null=True, related_name='universitycareer')
+    item_category_id = models.ForeignKey('ItemCategory', on_delete=models.CASCADE, null=False, related_name='item_category_id')
+    universitycareer = models.ForeignKey('ItemCategory', on_delete=models.CASCADE, null=False, related_name='universitycareer')
 
 class Persons_role (models.Model):
     persons_role_id = models.AutoField(primary_key=True)
@@ -57,6 +56,9 @@ class Subject_matter (models.Model):
     name_subject_matter = models.CharField(max_length=255)
     universitycareer = models.ForeignKey(ItemCategory, on_delete = models.CASCADE)
 
+    def __str__(self):
+        return self.name_subject_matter
+
 class Pre_requirements (models.Model):
     pre_requirements_id = models.AutoField(primary_key=True)
     subject_matter_id_id = models.ForeignKey('Subject_matter', on_delete=models.CASCADE, null=False, related_name='subject_matter_id_id')
@@ -64,14 +66,17 @@ class Pre_requirements (models.Model):
 
 class Site (models.Model):
     site_id = models.AutoField(primary_key=True)
-    title = models.CharField(max_length=45)
-    icon = models.CharField(max_length=45)
-    favicon = models.CharField(max_length=45)
+    title = models.CharField(max_length=45, null=False)
+    icon = models.CharField(max_length=45, null=False)
+    favicon = models.CharField(max_length=45, null=False)
+
+    def __str__(self):
+        return self.title
 
 class Info_site (models.Model):
     info_site_id = models.AutoField(primary_key=True)
     site_site_id = models.ForeignKey(Site, on_delete = models.CASCADE)
-    description = models.CharField(max_length=45)
+    description = models.CharField(max_length=45, null=False)
     type_info = models.ForeignKey(ItemCategory, on_delete = models.CASCADE)
 
 class Content (models.Model):
@@ -84,10 +89,13 @@ class Content (models.Model):
     academic_period = models.ForeignKey('ItemCategory', on_delete=models.CASCADE, null=False, related_name='academic_period')
     content_universitycareer = models.ForeignKey('ItemCategory', on_delete=models.CASCADE, null=False, related_name='content_universitycareer')
 
+    def __str__(self):
+        return self.title
+
 class Content_media (models.Model):
     content_media_id = models.AutoField(primary_key=True)
     path = models.CharField(max_length=500)
-    item_category_item_category_id = models.ForeignKey(ItemCategory, on_delete = models.CASCADE)
+    item_category_item_category_id = models.ForeignKey(ItemCategory, null=False, on_delete = models.CASCADE)
     content_content_id = models.ForeignKey(Content, null=False, on_delete = models.CASCADE)
 
 class UserManager(BaseUserManager):
@@ -120,7 +128,6 @@ class Users(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = ('Users')
 
     objects = UserManager()
-
 
     def has_perm(self, perm, obj=None):
         return True
